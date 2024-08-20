@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulk Domain Checker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://pub-43a53727afcf495c8c8d7c8ac51af74e.r2.dev/uvuwe2As3Na0ajKLm112V1.css"> 
+  <style>
+    :root {
+      --sidebar-width: 250px;
+      --sidebar-collapsed-width: 80px;
+      --sidebar-bg-color: #2c3e50;
+      --sidebar-text-color: #ecf0f1;
+      --sidebar-hover-color: #34495e;
+      --primary-color: #3498db;
+      --transition-speed: 0.3s;
+      --background-color: #f7f8fc;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f7f8fc, #ffffff);
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      height: 100vh;
+      position: fixed;
+      width: var(--sidebar-width);
+      background-color: var(--sidebar-bg-color);
+      transition: width var(--transition-speed);
+    }
+
+    .sidebar.collapsed {
+      width: var(--sidebar-collapsed-width);
+    }
+
+    .sidebar .nav-link {
+      color: var(--sidebar-text-color);
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .sidebar .nav-link:hover {
+      background-color: var(--sidebar-hover-color);
+    }
+
+    .sidebar .nav-link .icon {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .sidebar .nav-link .menu-text {
+      flex-grow: 1;
+      transition: opacity var(--transition-speed);
+    }
+
+    .sidebar.collapsed .nav-link .menu-text {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sidebar .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: -25px;
+      background-color: var(--sidebar-bg-color);
+      border-radius: 50%;
+      color: var(--sidebar-text-color);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: right var(--transition-speed);
+    }
+
+    .sidebar.collapsed .toggle-btn {
+      right: -25px;
+    }
+
+    .content {
+      margin-left: var(--sidebar-width);
+      padding: 20px;
+      transition: margin-left var(--transition-speed);
+      background-color: var(--background-color);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sidebar.collapsed ~ .content {
+      margin-left: var(--sidebar-collapsed-width);
+    }
+
+    textarea#domainList {
+      width: 100%;
+      height: 200px;
+      resize: none;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+    }
+
+    table.table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.table thead {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+
+    table.table tbody tr {
+      background-color: #f9f9f9;
+    }
+
+    table.table tbody tr:nth-child(even) {
+      background-color: #eee;
+    }
+
+    table.table tbody td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    table.table tbody td.status {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="toggle-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="d-flex flex-column p-3">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <i class="fas fa-shield-alt icon"></i><span class="fs-4 menu-text">Nawala Checker</span>
+      </a>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="/" class="nav-link">
+            <i class="fas fa-home icon"></i><span class="menu-text">Single Domain Checker</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/bulk" class="nav-link active">
+            <i class="fas fa-layer-group icon"></i><span class="menu-text">Bulk Domain Checker</span>
+          </a>
+        </li>
+        <li>
+          <a href="/login.html" class="nav-link">
+            <i class="fas fa-sign-out-alt icon"></i><span class="menu-text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Bulk Domain Checker</h1>
+    <textarea id="domainList" placeholder="Enter domains, one per line"></textarea>
+    <button id="checkDomainsButton" class="btn btn-primary mb-3">Check Domains</button>
+    <div id="results" class="table-responsive">
+      <table id="bulkDomainTable" class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/bulk.js"></script>
+</body>
+</html>
